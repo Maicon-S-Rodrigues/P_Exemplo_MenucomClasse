@@ -27,17 +27,21 @@ namespace P_Exemplo_MenucomClasse
             return pessoa;*/
         }
 
-        static void imprimirContatos(Pessoa[] contatos)
+        static void imprimirContatos(Pessoa[] contatos, int quant)
         {
             Console.Clear();
-            Console.WriteLine(">>> CONTATOS <<<");
-            Console.WriteLine("NOME: " + contatos[0].Nome + "\nIDADE: " + contatos[0].Idade);
+            Console.WriteLine(">>> CONTATOS <<<\n");
+            for (int i = 0; i < quant; i++)
+            {
+                Console.WriteLine("NOME: " + contatos[i].Nome + "\nIDADE: " + contatos[i].Idade);
+                Console.WriteLine("\n\n");
+            }
         }
         static void Main(string[] args)
         {
-            Pessoa[] contatos = new Pessoa[10];
+            Pessoa[] contatos = new Pessoa[3];
             int opc;
-
+            int quant = 0;
             do
             {
                 Console.WriteLine("Informe a opção desejada: ");
@@ -54,18 +58,27 @@ namespace P_Exemplo_MenucomClasse
                         break;
 
                     case 1:
-                        contatos[0] = lerPessoa();      ////vetor contatos receberá o Return do método lerPessoa
+                        if (quant != contatos.Length)
+                        {
+                            contatos[quant] = lerPessoa();      ////vetor contatos receberá o Return do método lerPessoa
+                            quant++;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Desculpe!\nLimite de Cadastros atingido!");
+                        }
                         break;
 
                     case 2:
-                        imprimirContatos(contatos);
+                        imprimirContatos(contatos, quant);
                         break;
 
                     default:
                         break;
                 }
 
-            } while (opc !=0);
+            } while (opc != 0);
             Console.WriteLine(">>>>> FIM <<<<<");
         }
     }
